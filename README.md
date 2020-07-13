@@ -1,5 +1,7 @@
 ### 环境 python3.6
+
 pip install tqdm
+
 pip install pandas
 
 -----------------------------------------------------------------------------------------
@@ -8,8 +10,8 @@ pip install pandas
 入口函数：Q1/get_p90.py
 执行：
 
-    1.cd Q1
-    2.python get_p90.py
+    cd Q1
+    python get_p90.py
 
 -----------------------------------------------------------------------------------------
 
@@ -18,13 +20,13 @@ pip install pandas
 入口函数：Q2/get_top_1w_pandas.py
 执行：
 
-    1.cd Q2
-    2.python  get_top_1w_pandas.py
+    cd Q2
+    python  get_top_1w_pandas.py
 
 
 #### 解法2
 入口函数：Q2/get_top_1w_hash.py
 执行：
 
-    1.cd Q2
-    2.python  get_top_1w_hash.py
+    cd Q2
+    python  get_top_1w_hash.py
