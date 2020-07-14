@@ -19,8 +19,8 @@ import hashlib
 import os
 import time
 RM_DUP_DICT = dict()  # 哈希去重
-FS = []  # 文件句柄
-BUCKET_NUM = 1024
+BUCKET_NUM = 1024  # 分桶个数
+FS = []  # 文件句柄，分桶位置
 
 
 def check_dir(slice_files_dir):
@@ -51,13 +51,20 @@ def close_files():
 
 
 def get_file_md5(my_string) -> str:
+    """将文本转为md5码
+    Args:
+        my_string: 文本内容，str
+    """
     m = hashlib.md5()
     m.update(my_string)
     return m.hexdigest()
 
 
 def file_split_buckets(file_path):
-    # 创建1024个桶
+    """创建1024个桶，并哈希去重
+    Args:
+        file_path: 输入文件
+    """
     open_files_for_write("bucket_files")
     global RM_DUP_DICT, FS
     num = 0
@@ -78,6 +85,11 @@ def file_split_buckets(file_path):
 
 
 def get_top_n(file_path, num) -> list:
+    """获取结果
+    Args:
+        file_path: 输入文件
+        num: 结果的个数，int
+    """
     num_ret = []  # 满足条件的行号列表
     open_files_for_read("bucket_files")
     global FS
@@ -122,7 +134,7 @@ def main(input_file, top_n, bucket_files_dir):
     file_split_buckets(input_file)
     # 获取最长的top n的文本
     result = get_top_n(input_file, top_n)
-    # print("top_n_text:", result)
+    print("top_n_text:", result)
 
 
 if __name__ == "__main__":
@@ -130,6 +142,7 @@ if __name__ == "__main__":
     bucket_files_dir = "bucket_files"  # 分桶地址
     top_n = 1000
     start = time.time()
+    
     main(input_file, top_n, bucket_files_dir)
     end = time.time()
     print("耗时(s)：", end-start)
