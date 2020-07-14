@@ -10,12 +10,15 @@ Description:
     2.根据顺序依次从大到小读出topN
     3.获取topN在文件中的行数并读取大文件表获取内容
     4.循环输出topN
-md5码：128位，16个字节
+
+优化点：
+    1.md5码，16个字节,128位,2**128=10**40，100亿条数据，32位就够用，最小完美哈希
+    2.加缓存，避免重复读入数据
 """
 import hashlib
 import os
 import time
-RM_DUP_DICT = dict()
+RM_DUP_DICT = dict()  # 哈希去重
 FS = []  # 文件句柄
 BUCKET_NUM = 1024
 
@@ -47,9 +50,9 @@ def close_files():
     FS = []
 
 
-def get_file_md5(mystring) -> str:
+def get_file_md5(my_string) -> str:
     m = hashlib.md5()
-    m.update(mystring)
+    m.update(my_string)
     return m.hexdigest()
 
 
@@ -62,42 +65,42 @@ def file_split_buckets(file_path):
     with open(file_path, 'rb') as f:
         for line in f:
             num += 1
-            length = len(line)
+            length = len(line)  # 文本长度
             if length == 0:
                 continue
             max_v = max(max_v, length)
-            md5_value = get_file_md5(line)
+            md5_value = get_file_md5(line)  # 文本哈希
+            # 哈希去重
             if md5_value not in RM_DUP_DICT:
                 RM_DUP_DICT[md5_value] = num
-                FS[length-1].write(str(num) + os.linesep)
+                FS[length-1].write(str(num) + os.linesep)  # 记录行数
     close_files()
 
 
 def get_top_n(file_path, num) -> list:
-    num_ret = []
+    num_ret = []  # 满足条件的行号列表
     open_files_for_read("bucket_files")
     global FS
     print("fs length:", len(FS))
     for i in range(1024, 0, -1):
-        if 0 >= num:
+        if num <= 0:
             break
         line = FS[i-1].readline()
         while line:
             num_ret.append(int(line))
             line = FS[i-1].readline()
             num -= 1
-            if 0 >= num:
+            if num <= 0:
                 break
     close_files()
-    # print(num_ret)
     num_ret.sort()
     line_num = 1
     ret_str = []
+    # 通过行号去原始文件取文本
     with open(file_path, 'rb') as f:
         for line in f:
             if len(num_ret) > 0:
                 if line_num == num_ret[0]:
-                    # print(line_num, line)
                     ret_str.append(line)
                     del num_ret[0]
             else:
@@ -119,7 +122,7 @@ def main(input_file, top_n, bucket_files_dir):
     file_split_buckets(input_file)
     # 获取最长的top n的文本
     result = get_top_n(input_file, top_n)
-    print("top_n_text:", result)
+    # print("top_n_text:", result)
 
 
 if __name__ == "__main__":
