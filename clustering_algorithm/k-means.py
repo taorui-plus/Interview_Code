@@ -71,11 +71,11 @@ if __name__ == '__main__':
     # 可视化
     # for center in k_means.centers_:
     #     pyplot.scatter(k_means.centers_[center][0], k_means.centers_[center][1], marker='*', s=150)
-    # for cat in k_means.clf_:
-    #     for point in k_means.clf_[cat]:
-    #         pyplot.scatter(point[0], point[1], c=('r' if cat == 0 else 'b'))
+    for cat in k_means.clf_:
+        for point in k_means.clf_[cat]:
+            pyplot.scatter(point[0], point[1], c=('r' if cat == 0 else 'b'))
     # predict = [[2, 1], [6, 9]]
     # for feature in predict:
     #     cat = k_means.predict(predict)
     #     pyplot.scatter(feature[0], feature[1], c=('r' if cat == 0 else 'b'), marker='x')
-    # pyplot.show()
+    pyplot.show()
