@@ -1,7 +1,7 @@
 -----------------------
 
 
-There are a total of seven classic algorithm problems here;
+There are a total of seven classic algorithm problems here（I put them in 7 folders）;
 
 Q1 and Q2 are two topics related to big data processing;
 
@@ -16,7 +16,7 @@ The other five topics are:
 -----------------------
      
      
-这里一共有七道经典的算法题；
+这里一共有七道经典的算法题（我把他们分别放在了7个文件夹中）；
 
 Q1和Q2是和大数据处理相关的两道题目；
 
