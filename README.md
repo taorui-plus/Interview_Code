@@ -2,25 +2,31 @@
 
 
 There are a total of seven classic algorithm problems here;
+
 Q1 and Q2 are two topics related to big data processing;
+
 The other five topics are: 
-      DBScan clustering algorithm, 
-      simple dynamic programming, 
-      classic sorting algorithm, 
-      full arrangement of strings, 
-      calculation of tf-idf
+
+      1.DBScan clustering algorithm, 
+      2.simple dynamic programming, 
+      3.classic sorting algorithm, 
+      4.full arrangement of strings, 
+      5.calculation of tf-idf
      
 -----------------------
      
      
 这里一共有七道经典的算法题；
+
 Q1和Q2是和大数据处理相关的两道题目；
+
 其他五道题目分别是：
-       DBScan聚类算法、
-       简单的动态规划、
-       经典的排序算法、
-       字符串的全排列、
-       tf-idf的计算
+
+       1.DBScan聚类算法、
+       2.简单的动态规划、
+       3.经典的排序算法、
+       4.字符串的全排列、
+       5.tf-idf的计算
 
 
 
